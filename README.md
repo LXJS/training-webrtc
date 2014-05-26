@@ -26,10 +26,10 @@ In order to prepare to this training you should/must do the following List of re
 
 `fill in`
 
-## 27 Jun XX:YYh Participants
+## 27 Jun 14:30h Participants
 
 `TBA`
 
-## 28 Jun XX:YYh Participants
+## 28 Jun 17:30h Participants
 
 `TBA`
