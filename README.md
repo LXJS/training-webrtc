@@ -1,8 +1,8 @@
 # ![webrtc](http://www.webrtc.org/_/rsrc/1318870658554/config/customLogo.gif?revision=8) workshop
 
-"Imagine a world where your phone, TV and computer could all communicate on a common platform. Imagine it was easy to add video chat and peer-to-peer data sharing to your web application. That's the vision of WebRTC." — Sam Dutton
+*"Imagine a world where your phone, TV and computer could all communicate on a common platform. Imagine it was easy to add video chat and peer-to-peer data sharing to your web application. That's the vision of WebRTC." — Sam Dutton*
 
-**WebRTC** (Web Real-Time Communication) is an API drafted by the World Wide Web Consortium (W3C) that supports **browser-to-browser applications for voice calling, video chat, and P2P file sharing without plugins.**
+**WebRTC** (Web Real-Time Communication) is an API drafted by the World Wide Web Consortium (W3C) that supports browser-to-browser applications for voice calling, video chat, and P2P file sharing without plugins.
 
 ## Overview
 
@@ -26,25 +26,27 @@ In this workshop at LXJS 2014, we will cover:
 
 Check out some of the real-world products that make use of WebRTC:
 
-- [Talky](http://talky.io/) - Simple video chat
-- [ShareFest](http://sharefest.me) - Simple file sharing
-- [PeerCDN](http://peercdn.com) (the original) / [Peer5](http://peer5.com) / SwarmCDN / StreamRoot - P2P CDNs
-- Chromecast
-- Amazon Kindle thing
-- Snapchat (WebRTC acquisition)
-- Mozilla browse together thing - togetherJS?
+- Simple video chat - [Talky](http://talky.io/), [AppRTC](https://apprtc.appspot.com/)
+- Simple file sharing - [ShareFest](http://sharefest.me)
+- Peer-to-peer CDN - [PeerCDN](http://peercdn.com), [Peer5](http://peer5.com), [Swarmify](http://swarmify.com/), [StreamRoot](http://www.streamroot.io/)
+- [Chromecast](http://www.webrtcworld.com/topics/from-the-experts/articles/347900-chromecast-webrtc.htm)
+- [Amazon Mayday](http://webrtchacks.com/mayday-trace/)
+- [Snapchat](http://www.webrtcworld.com/topics/webrtc-world/articles/378013-wheelings-dealings-snapchat-acquires-webrtc-company-addlive.htm)
+- [TogetherJS](https://togetherjs.com/)
 
-### Experimental WebRTC Projects
+### Experimental WebRTC Products
 
-Mad scientists are pushing WebRTC to its limits. Check out some crazy projects:
+Mad scientists are pushing WebRTC to its limits. Check out these crazy projects:
 
 - [Peer-Server](http://peer-server.com) - server backend in the browser
 - [WebTorrent](http://webtorrent.io) - streaming bittorrent client in the browser
+- [WebRTC Plugin for old browsers](https://temasys.atlassian.net/wiki/display/TWPP/WebRTC+Plugins) - so you can make WebRTC work on IE9/10/11 and Safari
 
 ### WebRTC Vendors
 
-- GoInstant
-- more...
+- [AT&T](https://js.att.io/)
+- [GoInstant](https://developers.goinstant.com/v1/widgets/audio_and_video/index.html)
+- [Tokbox](http://tokbox.com/opentok/intro/)
 
 ## Sound interesting?
 
