@@ -22,6 +22,8 @@ In this workshop at LXJS 2014, we will cover:
   - How to create reliable (tcp-like) and unreliable (udp-like) data channels
 - How to handle browser differences
 
+## Get excited
+
 ### Products using WebRTC
 
 Check out some of the real-world products that make use of WebRTC:
@@ -58,23 +60,23 @@ In order to prepare for this workshop, should read the following articles before
 
 ### Todo List
 
+- [ ] Check out [talky.io](https://talky.io/) and [sharefest.me](https://www.sharefest.me/)
 - [ ] Read [Getting Started with WebRTC](http://www.html5rocks.com/en/tutorials/webrtc/basics/)
-- [ ] Watch Google I/O WebRTC 2013 presentation
-- [ ] Check out talky.io and sharefest.me
+- [ ] Watch [Google I/O 2013 WebRTC presentation](https://www.youtube.com/watch?v=p2HzZkd2A40)
+- [ ] Do "WebRTC Voodoo" workshopper -- coming soon
 
 ### Additional Resources
 
 These are not required, but if you want to hack on WebRTC code before you get to LXJS, you should check out the following links (with sample code!)
 
-- [Cross-browser WebRTC Data Channel starter code](https://github.com/quartzjer/webrtc-peer/)
+- [Cross-browser video/audio (adapter.js)](https://code.google.com/p/webrtc/source/browse/trunk/samples/js/base/adapter.js?r=3905)
+- [Cross-browser data channel (webrtc-peer)](https://github.com/quartzjer/webrtc-peer/)
 
 ## Hi, I'm Feross!
 
-I'll be your trainer! :) I built PeerCDN, WebTorrent, etc.
+![feross](https://avatars3.githubusercontent.com/u/121766?s=300)
 
-[PIC]
-
-- [Feross Aboukhadijeh](http://feross.org)
+I'll be your trainer! :) I am currently building [WebTorrent](http://webtorrent.io), a streaming BitTorrent client for the browser, powered by WebRTC. Before that, I built [PeerCDN](https://peercdn.com/), a peer-to-peer content delivery network to makes sites faster and cheaper (which was acquired by Yahoo). Check out my blog at [feross.org](http://feross.org).
 
 ## 27 Jun 14:30h Participants
 
