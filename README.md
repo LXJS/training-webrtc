@@ -1,6 +1,8 @@
 WebRTC
 ======
 
+![webrtc](https://raw.githubusercontent.com/LXJS/training-webrtc/master/img.png)
+
 > "Imagine a world where your phone, TV and computer could all communicate on a common platform. Imagine it was easy to add video chat and peer-to-peer data sharing to your web application. That's the vision of WebRTC." -- Sam Dutton
 
 **WebRTC** (Web Real-Time Communication) is an API drafted by the World Wide Web Consortium (W3C) that supports **browser-to-browser applications for voice calling, video chat, and P2P file sharing without plugins.**
