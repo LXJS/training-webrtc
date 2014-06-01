@@ -1,7 +1,4 @@
-WebRTC
-======
-
-![webrtc](http://www.webrtc.org/_/rsrc/1318870658554/config/customLogo.gif?revision=8)
+# ![webrtc](http://www.webrtc.org/_/rsrc/1318870658554/config/customLogo.gif?revision=8) workshop
 
 "Imagine a world where your phone, TV and computer could all communicate on a common platform. Imagine it was easy to add video chat and peer-to-peer data sharing to your web application. That's the vision of WebRTC." — Sam Dutton
 
