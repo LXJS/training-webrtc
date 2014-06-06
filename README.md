@@ -80,10 +80,55 @@ These are not required, but if you want to hack on WebRTC code before you get to
 
 I'll be your trainer! :) I am currently building [WebTorrent](http://webtorrent.io), a streaming BitTorrent client for the browser, powered by WebRTC. Before that, I built [PeerCDN](https://peercdn.com/), a peer-to-peer content delivery network to makes sites faster and cheaper (which was acquired by Yahoo). Check out my blog at [feross.org](http://feross.org).
 
-## 27 Jun 14:30h Participants
+## 28 jun - 17:30h Participants
 
-`TBA`
+- Abel Soares - [abelsoares](https://github.com/abelsoares)
+- Bruno Abrantes - [inf0rmer](https://github.com/inf0rmer)
+- David Cruz - [dcruz](https://github.com/dcruz)
+- Dominic Lüchinger - [dol](https://github.com/dol)
+- Franz Enzenhofer - [franzenzenhofer](https://github.com/franzenzenhofer)
+- Igor Soarez - [soarez](https://github.com/soarez)
+- João Jerónimo - [joaojeronimo](https://github.com/joaojeronimo)
+- Jorge Monteiro - [jorgemonteiro](https://github.com/jorgemonteiro)
+- Leonardo Aretakis - [leoaretakis](https://github.com/leoaretakis)
+- Luís Ferreira - [zamith](https://github.com/zamith)
+- Luke Bond - [lukebond](https://github.com/lukebond)
+- Max Gfeller - [MaxGfeller](https://github.com/MaxGfeller)
+- Miguel Serrano - [miguelvps](https://github.com/miguelvps)
+- Miguel Palhas - [naps62](https://github.com/naps62)
+- Nuno Costa - [naflcosta](https://github.com/naflcosta)
+- Paulo Miranda - [pauloabmiranda](https://github.com/pauloabmiranda)
+- Robert Kowalski - [robertkowalski](https://github.com/robertkowalski)
+- Rogério Vicente - [rogeriopvl](https://github.com/rogeriopvl)
+- Ronaldo Sousa - [ronaldofs](https://github.com/ronaldofs)
+- Sandro Maio - [sandromaio](https://github.com/sandromaio)
+- Tim Park - [timfpark](https://github.com/timfpark)
+- Tom Cartwright - [tomcartwrightuk](https://github.com/tomcartwrightuk)
 
-## 28 Jun 17:30h Participants
+## 27 jun - 14:30h Participants
 
-`TBA`
+- Charlie Robbins - [indexzero](https://github.com/indexzero)
+- David McMullin - [davecocoa](https://github.com/davecocoa)
+- Dominykas Blyžė - [dymonaz](https://github.com/dymonaz)
+- Frederic Hemberger - [fhemberger](https://github.com/fhemberger)
+- George Shank - [taterbase](https://github.com/taterbase)
+- Igor Soarez - [soarez](https://github.com/soarez)
+- J Oates - [joates](https://github.com/joates)
+- James Wood - [jamesjwood](https://github.com/jamesjwood)
+- João Nelas - [adagios](https://github.com/adagios)
+- João Reis
+- Joaquim Serafim - [joaquimserafim](https://github.com/joaquimserafim)
+- John Brett - [johnbrett](https://github.com/johnbrett)
+- Jorge Dias - [diasjorge](https://github.com/diasjorge)
+- Luis Naia
+- Luis Confraria - [luisbug](https://github.com/luisbug)
+- Matteo Collina - [mcollina](https://github.com/mcollina)
+- Matthias Knoll - [kohlikohl](https://github.com/kohlikohl)
+- Miguel Coquet - [mcoquet](https://github.com/mcoquet)
+- Pierre Ozoux - [pierreozoux](https://github.com/pierreozoux)
+- Ricardo Tomasi - [ricardobeat](https://github.com/ricardobeat)
+- Ricardo Melo - [rjsmelo](https://github.com/rjsmelo)
+- Ricardo Soares - [rsoares](https://github.com/rsoares)
+- Sebastian Golasch - [asciidisco](https://github.com/asciidisco)
+- Tracy Hinds - [hackygolucky](https://github.com/hackygolucky)
+- Zoltan Feher - [zkiiito](https://github.com/zkiiito)
