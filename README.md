@@ -120,7 +120,7 @@ I'll be your trainer! :) I am currently building [WebTorrent](http://webtorrent.
 - Joaquim Serafim - [joaquimserafim](https://github.com/joaquimserafim)
 - John Brett - [johnbrett](https://github.com/johnbrett)
 - Jorge Dias - [diasjorge](https://github.com/diasjorge)
-- Luis Naia
+- Luis Naia - [darkbls](https://github.com/darkbls)
 - Luis Confraria - [luisbug](https://github.com/luisbug)
 - Matteo Collina - [mcollina](https://github.com/mcollina)
 - Matthias Knoll - [kohlikohl](https://github.com/kohlikohl)
