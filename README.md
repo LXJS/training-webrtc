@@ -57,7 +57,7 @@ Great! Here's how to get ready.
 
 ### Pre-Workshop Preparation
 
-In order to prepare for this workshop, should read the following articles before arriving at LXJS! If you have a question, please [open an issue](https://github.com/LXJS/training-webrtc/issues) and we will be glad to answer. You might be helping other participants!
+In order to prepare for this workshop, you should read the following articles before arriving at LXJS! If you have a question, please [open an issue](https://github.com/LXJS/training-webrtc/issues) and we will be glad to answer. You might be helping other participants!
 
 ### Todo List
 
