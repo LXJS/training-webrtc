@@ -118,6 +118,9 @@ I'll be your trainer! :) I am currently building [WebTorrent](http://webtorrent.
 - Mauro Pompilio - [malditogeek](https://github.com/malditogeek)
 - Mate Nadasdi - [matenadasdi](https://github.com/matenadasdi)
 - Andre Duarte - [onemanclapping](https://github.com/onemanclapping)
+- Gergely Nemeth - [gergelyke](https://github.com/gergelyke)
+- Ana Castanho - [anarcastanho](https://github.com/anarcastanho)
+- Carlos Timóteo - [ctimoteo](https://github.com/ctimoteo)
 
 ## 28 jun - 17:30h Participants
 
@@ -131,6 +134,7 @@ I'll be your trainer! :) I am currently building [WebTorrent](http://webtorrent.
 - Matej Nemcek - [yangwao](https://github.com/yangwao)
 - Alexandre Campos - [axfcampos](https://github.com/axfcampos)
 - Franz Enzenhofer - [franzenzenhofer](https://github.com/franzenzenhofer)
+- Nuno Rosa - [yarcub](https://github.com/yarcub)
 - David Bruant - [DavidBruant](https://github.com/DavidBruant)
 - Paulo Miranda - [pauloabmiranda](https://github.com/pauloabmiranda)
 - Tim Park - [timfpark](https://github.com/timfpark)
@@ -138,6 +142,8 @@ I'll be your trainer! :) I am currently building [WebTorrent](http://webtorrent.
 - Dominic Lüchinger - [dol](https://github.com/dol)
 - Max Gfeller - [MaxGfeller](https://github.com/MaxGfeller)
 - Tom Cartwright - [tomcartwrightuk](https://github.com/tomcartwrightuk)
+- Manuel Cajada - [cajadas](https://github.com/cajadas)
+- Rui Patinha - [rfp](https://github.com/rfp)
 - Luke Bond - [lukebond](https://github.com/lukebond)
 - Mike Brevoort - [mbrevoort](https://github.com/mbrevoort)
 - Kevin Sawicki - [kevinsawicki](https://github.com/kevinsawicki)
@@ -151,7 +157,10 @@ I'll be your trainer! :) I am currently building [WebTorrent](http://webtorrent.
 - Bruno Abrantes - [inf0rmer](https://github.com/inf0rmer)
 - Leonardo Aretakis - [leoaretakis](https://github.com/leoaretakis)
 - Ronaldo Sousa - [ronaldofs](https://github.com/ronaldofs)
+- Gabriel Poça - [gabrielpoca](https://github.com/gabrielpoca)
 - Nathan Sobo - [nathansobo](https://github.com/nathansobo)
 - Sugendran Ganess - [sugendran](https://github.com/sugendran)
 - Andre Duarte - [onemanclapping](https://github.com/onemanclapping)
 - Thiago Dantas - [tdantas](https://github.com/tdantas)
+- Yacine Rezgui - [yrezgui](https://github.com/yrezgui)
+- Pedro Nunes - [pmiguelrn](https://github.com/pmiguelrn)
