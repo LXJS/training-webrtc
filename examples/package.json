@@ -1,18 +1,18 @@
 {
-  "name": "codelab",
+  "name": "workshop",
   "version": "0.0.1",
-  "description": "WebRTC codelab",
+  "description": "WebRTC workshop",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/webrtc/codelab"
+    "url": "https://bitbucket.org/webrtc/workshop"
   },
   "keywords": [
     "webrtc",
-    "codelab"
+    "workshop"
   ],
   "author": "webrtc",
   "license": "MIT",

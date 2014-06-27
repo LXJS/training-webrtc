@@ -1,43 +1,28 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>WebRTC workshop: step 2</title>
+  </head>
 
-<head>
+  <body>
 
-<meta name="keywords" content="JavaScript, WebRTC" />
-<meta name="description" content="WebRTC codelab" />
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <video></video>
 
-<title>WebRTC codelab: step 2</title>
+    <script>
+      function success (stream) {
+        window.stream = stream; // stream available to console
+        var video = document.querySelector('video');
+        video.src = window.URL.createObjectURL(stream);
+        video.play();
+      }
 
-<style>
-</style>
+      function fail (err) {
+        console.error("getUserMedia error: ", err);
+      }
 
-    <script src='js/lib/adapter.js'></script>
+      navigator.getUserMedia({ video: true }, success, fail);
+    </script>
 
-</head>
-
-<body>
-
-<video />
-
-<script>
-
-var constraints = {video: true};
-
-function successCallback(stream) {
-  window.stream = stream; // stream available to console
-  var video = document.querySelector("video");
-  video.src = window.URL.createObjectURL(stream);
-  video.play();
-}
-
-function errorCallback(error){
-  console.log("getUserMedia error: ", error);
-}
-
-getUserMedia(constraints, successCallback, errorCallback);
-</script>
-
-</body>
+  </body>
 
 </html>

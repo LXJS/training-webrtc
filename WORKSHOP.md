@@ -54,78 +54,80 @@ git clone https://github.com/LXJS/training-webrtc.git
 cd training-webrtc
 ```
 
-## Step 1: Create a blank HTML5 document
+## Step 1: Create a blank HTML5 document & simple server
 
-Complete example: [examples/step1](https://github.com/LXJS/training-webrtc/tree/master/examples/step1).
+1. Create a bare-bones HTML document called `index.html`.
+1. Use [node-static](https://npmjs.org/package/node-static) to create a simple static file server that listens on port `2014` and serves index.html (and all files in the same folder).
+1. Test it out by visiting [http://localhost:2014](http://localhost:2014).
 
-1. Create a bare-bones HTML document.
-1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
-    - Why is there nothing on the screen?
+When you're done (or if you get stuck), check your solution against the solution in the `examples/step1` folder.
+
+### Solution
+
+[examples/step1](https://github.com/LXJS/training-webrtc/tree/master/examples/step1)
 
 
 ## Step 2: Get video from your webcam
 
-Complete example: [examples/step2](https://github.com/LXJS/training-webrtc/tree/master/examples/step2).
-
 1. Add a video element to your page.
-2. Add the following JavaScript to the script element on your page, to enable getUserMedia() to set the source of the video from the web cam:
+1. Use `navigator.getUserMedia` to capture the user's webcam.
+1. To make `getUserMedia` work across browsers, you need to add the following code:
 
-        navigator.getUserMedia = navigator.getUserMedia ||
-          navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
-        var constraints = {video: true};
-
-        function successCallback(localMediaStream) {
-          window.stream = localMediaStream; // stream available to console
-          var video = document.querySelector("video");
-          video.src = window.URL.createObjectURL(localMediaStream);
-          video.play();
-        }
-
-        function errorCallback(error){
-          console.log("navigator.getUserMedia error: ", error);
-        }
-
-        navigator.getUserMedia(constraints, successCallback, errorCallback);
+  navigator.getUserMedia = navigator.getUserMedia
+    || navigator.webkitGetUserMedia
+    || navigator.mozGetUserMedia
+    || navigator.msGetUserMedia;
 
 1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
-### Explanation
+### Hints
 
 `getUserMedia` is called like this:
 
-    navigator.getUserMedia(constraints, successCallback, errorCallback);
+  navigator.getUserMedia(constraints, successCallback, errorCallback);
 
 The constraints argument allows us to specify the media to get, in this case video only:
 
-    var constraints = {"video": true}
+  var constraints = { video: true }
 
-If successful, the video stream from the webcam is set as the source of the video element:
+If successful, the success callback is called with the video stream from the
+webcam. You can then set it as the source of a video tag.
 
-    function successCallback(localMediaStream) {
-      window.stream = localMediaStream; // stream available to console
-      var video = document.querySelector("video");
-      video.src = window.URL.createObjectURL(localMediaStream);
-      video.play();
-    }
+  function successCallback (localMediaStream) {
+    window.stream = localMediaStream; // stream available to console
+    var video = document.querySelector('video');
+    video.src = window.URL.createObjectURL(localMediaStream);
+    video.play();
+  }
+
+If there was an error (like the user denied access to their webcam), then the error callback is called with an error object.
+
+  function errorCallback(error){
+    console.error('navigator.getUserMedia error: ', error);
+  }
+
+### Solution
+
+[examples/step2](https://github.com/LXJS/training-webrtc/tree/master/examples/step2)
 
 ### Bonus points
 
 1. Inspect the stream object from the console.
 2. Try calling `stream.stop()`.
 3. What does `stream.getVideoTracks()` return?
-4. Look at the constraints object: what happens when you change it to `{audio: true, video: true}`?
+4. Look at the constraints object: what happens when you change it to `{ audio: true, video: true }`?
 5. What size is the video element?  How can you get the video's natural size from JavaScript? Use the Chrome Dev Tools to check. Use CSS to make the video full width. How would you ensure the video is no higher than the viewport?
 6. Try adding CSS filters to the video element (more ideas [here](http://html5-demos.appspot.com/static/css/filters/index.html)).
 7. Try changing constraints: see the sample at [simpl.info/getusermedia/constraints](https://simpl.info/getusermedia/constraints/).
 
 For example:
 
-    video {
-      filter: hue-rotate(180deg) saturate(200%);
-      -moz-filter: hue-rotate(180deg) saturate(200%);
-      -webkit-filter: hue-rotate(180deg) saturate(200%);
-    }
+  video {
+    filter: hue-rotate(180deg) saturate(200%);
+    -moz-filter: hue-rotate(180deg) saturate(200%);
+    -webkit-filter: hue-rotate(180deg) saturate(200%);
+  }
+
 
 ## Step 3: Stream video with RTCPeerConnection
 
@@ -276,7 +278,7 @@ To manage WebRTC video chat 'rooms':
 
 Our simple WebRTC application will only permit a maximum of two peers to share a room.
 
-1. Ensure you have Node, socket.io and [node-static](https://github.com/cloudhead/node-static) installed. Node can be downloaded from [nodejs.org](http://nodejs.org/); installation is straightforward and quick. To install socket.io and node-static, run Node Package Manager from a terminal in your application directory:
+1. Ensure you have Node, socket.io and [node-static](https://www.npmjs.org/package/node-static) installed. Node can be downloaded from [nodejs.org](http://nodejs.org/); installation is straightforward and quick. To install socket.io and node-static, run Node Package Manager from a terminal in your application directory:
 
 
         npm install socket.io

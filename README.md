@@ -66,7 +66,7 @@ In order to prepare for this workshop, you should read the following articles be
 - [ ] Check out [talky.io](https://talky.io/) and [sharefest.me](https://www.sharefest.me/)
 - [ ] Check out the [first WebRTC call ever made](https://www.youtube.com/watch?v=MsAWR_rJ5n8). Historical!
 - [ ] Read [Getting Started with WebRTC](http://www.html5rocks.com/en/tutorials/webrtc/basics/)
-- [ ] Watch [Google I/O 2013 WebRTC presentation](https://www.youtube.com/watch?v=p2HzZkd2A40)
+- [ ] Watch [Google I/O 2014 WebRTC presentation](https://www.youtube.com/watch?v=p2HzZkd2A40)
 - [ ] Complete activities in "WebRTC Voodoo" workshopper -- coming soon...
 
 ### Additional Resources
