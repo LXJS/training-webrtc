@@ -163,11 +163,9 @@ Your task is to set up a connection between two peers on the same page. Not much
   ```
 
 1. Use `getUserMedia` and `RTCPeerConnection` to implement video calling between the two video tags. The buttons should do the following:
-
   - start button: captures webcam video stream
   - call button: creates two RTCPeerConnection objects, sets up listeners
   - hangup button: closes the peer connections
-
 1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
 ### Hints
