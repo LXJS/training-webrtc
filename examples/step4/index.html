@@ -46,26 +46,21 @@ function trace(text) {
 
 function createConnection() {
   var servers = null;
-  window.localPeerConnection = new RTCPeerConnection(servers,
-    {optional: [{RtpDataChannels: true}]});
+  window.localPeerConnection = new RTCPeerConnection(servers);
   trace('Created local peer connection object localPeerConnection');
 
   try {
-    // Reliable Data Channels not yet supported in Chrome
     sendChannel = localPeerConnection.createDataChannel("sendDataChannel",
       {reliable: false});
     trace('Created send data channel');
   } catch (e) {
-    alert('Failed to create data channel. ' +
-          'You need Chrome M25 or later with RtpDataChannel enabled');
     trace('createDataChannel() failed with exception: ' + e.message);
   }
   localPeerConnection.onicecandidate = gotLocalCandidate;
   sendChannel.onopen = handleSendChannelStateChange;
   sendChannel.onclose = handleSendChannelStateChange;
 
-  window.remotePeerConnection = new RTCPeerConnection(servers,
-    {optional: [{RtpDataChannels: true}]});
+  window.remotePeerConnection = new RTCPeerConnection(servers);
   trace('Created remote peer connection object remotePeerConnection');
 
   remotePeerConnection.onicecandidate = gotRemoteIceCandidate;

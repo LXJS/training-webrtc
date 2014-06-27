@@ -22,7 +22,6 @@ var pc_config = webrtcDetectedBrowser === 'firefox' ?
 var pc_constraints = {
   'optional': [
     {'DtlsSrtpKeyAgreement': true},
-    {'RtpDataChannels': true}
   ]};
 
 // Set up audio and video regardless of what devices are present.
@@ -161,14 +160,11 @@ function createPeerConnection() {
 
   if (isInitiator) {
     try {
-      // Reliable Data Channels not yet supported in Chrome
       sendChannel = pc.createDataChannel("sendDataChannel",
         {reliable: false});
       sendChannel.onmessage = handleMessage;
       trace('Created send data channel');
     } catch (e) {
-      alert('Failed to create data channel. ' +
-            'You need Chrome M25 or later with RtpDataChannel enabled');
       trace('createDataChannel() failed with exception: ' + e.message);
     }
     sendChannel.onopen = handleSendChannelStateChange;
