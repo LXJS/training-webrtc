@@ -71,7 +71,11 @@ When you're done (or if you get stuck), check your solution against the solution
 
 1. Add a video element to your page.
 1. Use `navigator.getUserMedia` to capture the user's webcam.
-1. To make `getUserMedia` work across browsers, you need to add the following code:
+1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
+
+### Hints
+
+To make `getUserMedia` work across browsers, you need to add the following code:
 
   ```js
   navigator.getUserMedia = navigator.getUserMedia
@@ -79,10 +83,6 @@ When you're done (or if you get stuck), check your solution against the solution
     || navigator.mozGetUserMedia
     || navigator.msGetUserMedia;
   ```
-
-1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
-
-### Hints
 
 `getUserMedia` is called like this:
 
