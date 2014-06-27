@@ -142,39 +142,44 @@ If there was an error (like the user denied access to their webcam), then the er
 
 ## Step 3: Stream video with RTCPeerConnection
 
-Complete example: [examples/step3](https://github.com/LXJS/training-webrtc/tree/master/examples/step3).
+`RTCPeerConnection` is the WebRTC API for video and audio calling.
 
-RTCPeerConnection is the WebRTC API for video and audio calling.
+Your task is to set up a connection between two peers on the same page. Not much use in the real world, but good for understanding how RTCPeerConnection works!
 
-This example sets up a connection between two peers on the same page. Not much use, but good for understanding how RTCPeerConnection works!
-
+1. Take a look at the [munge SDP example](https://googlechrome.github.io/webrtc/samples/web/content/munge-sdp/). This will give you a concrete idea of the steps involved in a complete "signaling exchange".
 1. Get rid of the JavaScript you've entered so far -- we're going to do something different!
+1. Edit the HTML so there are two video elements and three buttons: Start, Call and Hang Up:
 
-2. Edit the HTML so there are two video elements and three buttons: Start, Call and Hang Up:
+  ```html
+  <!-- "muted" will prevent horrible audio feedback :) -->
+  <video id="localVideo" autoplay muted></video>
+  <video id="remoteVideo" autoplay muted></video>
 
+  <div>
+    <button id="startButton">Start</button>
+    <button id="callButton">Call</button>
+    <button id="hangupButton">Hang Up</button>
+  </div>
+  ```
 
-        <video id="localVideo" autoplay></video>
-        <video id="remoteVideo" autoplay></video>
+1. Use `getUserMedia` and `RTCPeerConnection` to implement video calling between the two video tags. The buttons should do the following:
 
-        <div>
-          <button id="startButton">Start</button>
-          <button id="callButton">Call</button>
-          <button id="hangupButton">Hang Up</button>
-        </div>
+  - start button: captures webcam video stream
+  - call button: creates two RTCPeerConnection objects, sets up listeners
+  - hangup button: closes the peer connections
 
-3. Add the JavaScript from [examples/step3/index.html](https://bitbucket.org/webrtc/workshop/raw/tree/master/examples/step3/index.html).
 1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
-### Explanation
+### Hints
 
-This code does a lot!
+* Get and share local and remote descriptions: metadata about local media in [SDP (Session Description Protocol)](http://en.wikipedia.org/wiki/Session_Description_Protocol) format.
 
-* Get and share local and remote descriptions: metadata about local media in SDP[^SDP] format.
-* Get and share ICE[^ICE] candidates: network information.
+* Get and share [ICE (Interactive Connectivity Establishment Protocol)](http://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment) candidates: network information.
 * Pass the local stream to the remote _RTCPeerConnection_.
 
-[^SDP]: [Session Description Protocol](http://en.wikipedia.org/wiki/Session_Description_Protocol)
-[^ICE]: [Interactive Connectivity Establishment Protocol](http://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment)
+### Solution
+
+[examples/step3](https://github.com/LXJS/training-webrtc/tree/master/examples/step3)
 
 ### Bonus points
 
@@ -185,6 +190,7 @@ This code does a lot!
     - Make sure it works on mobile.
 3. From the Chrome Dev Tools console, inspect _localStream_, _localPeerConnection_ and _remotePeerConnection_.
 4. Take a look at _localPeerConnection.localDescription_. What does SDP format look like?
+
 
 ## Step 4: Stream arbitrary data with RTCDataChannel
 
