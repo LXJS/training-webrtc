@@ -9,18 +9,25 @@
     <video></video>
 
     <script>
-      function success (stream) {
+
+      navigator.getUserMedia = navigator.getUserMedia
+        || navigator.webkitGetUserMedia
+        || navigator.mozGetUserMedia
+        || navigator.msGetUserMedia;
+
+      navigator.getUserMedia({ video: true }, successCallback, errorCallback);
+
+      function successCallback (stream) {
         window.stream = stream; // stream available to console
         var video = document.querySelector('video');
         video.src = window.URL.createObjectURL(stream);
         video.play();
       }
 
-      function fail (err) {
+      function errorCallback (err) {
         console.error("getUserMedia error: ", err);
       }
 
-      navigator.getUserMedia({ video: true }, success, fail);
     </script>
 
   </body>

@@ -172,6 +172,22 @@ in the real world, but good for understanding how RTCPeerConnection works!
 
 ### Hints
 
+- To make `RTCPeerConnection` work across browsers, you need to add the following code:
+
+```js
+var RTCPeerConnection = window.mozRTCPeerConnection
+  || window.RTCPeerConnection
+  || window.webkitRTCPeerConnection;
+
+var RTCSessionDescription = window.mozRTCSessionDescription
+  || window.RTCSessionDescription
+  || window.webkitRTCSessionDescription;
+
+var RTCIceCandidate = window.mozRTCIceCandidate
+  || window.RTCIceCandidate
+  || window.webkitRTCIceCandidate;
+```
+
 - Here is the flow of method calls and events:
 
 ![flow](step3.png)

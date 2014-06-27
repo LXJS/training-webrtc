@@ -15,6 +15,23 @@
     </div>
 
     <script>
+      navigator.getUserMedia = navigator.getUserMedia
+        || navigator.webkitGetUserMedia
+        || navigator.mozGetUserMedia
+        || navigator.msGetUserMedia;
+
+      var RTCPeerConnection = window.mozRTCPeerConnection
+        || window.RTCPeerConnection
+        || window.webkitRTCPeerConnection;
+
+      var RTCSessionDescription = window.mozRTCSessionDescription
+        || window.RTCSessionDescription
+        || window.webkitRTCSessionDescription;
+
+      var RTCIceCandidate = window.mozRTCIceCandidate
+        || window.RTCIceCandidate
+        || window.webkitRTCIceCandidate;
+
       var localStream, localPeerConnection, remotePeerConnection;
 
       var localVideo = document.getElementById('localVideo');
@@ -35,7 +52,7 @@
       function start () {
         console.log('Requesting local stream');
         startButton.disabled = true;
-        getUserMedia({ audio:true, video:true }, gotStream,
+        navigator.getUserMedia({ audio:true, video:true }, gotStream,
           function(error) {
             console.log('getUserMedia error: ', error);
           });
@@ -95,16 +112,16 @@
       }
 
       function gotLocalDescription (description) {
-        localPeerConnection.setLocalDescription(description);
+        localPeerConnection.setLocalDescription(new RTCSessionDescription(description));
         console.log('Offer from localPeerConnection: \n' + description.sdp);
-        remotePeerConnection.setRemoteDescription(description);
+        remotePeerConnection.setRemoteDescription(new RTCSessionDescription(description));
         remotePeerConnection.createAnswer(gotRemoteDescription, handleError);
       }
 
       function gotRemoteDescription (description) {
-        remotePeerConnection.setLocalDescription(description);
+        remotePeerConnection.setLocalDescription(new RTCSessionDescription(description));
         console.log('Answer from remotePeerConnection: \n' + description.sdp);
-        localPeerConnection.setRemoteDescription(description);
+        localPeerConnection.setRemoteDescription(new RTCSessionDescription(description));
       }
 
       function hangup () {
