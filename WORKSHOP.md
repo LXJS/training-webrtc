@@ -75,7 +75,7 @@ When you're done (or if you get stuck), check your solution against the solution
 
 ### API Docs
 
-- [navigator.getUserMedia](http://docs.webplatform.org/wiki/dom/Navigator/getUserMedia)
+- [navigator.getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia)
 
 ### Hints
 
