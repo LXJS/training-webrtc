@@ -202,6 +202,8 @@ in the real world, but good for understanding how RTCPeerConnection works!
 
 ![flow](step3.png)
 
+Of course, for this code challenge, there is no server. Everything is done locally, within the same page.
+
 - The "offers" and "answers" are in [SDP (Session Description
 Protocol)](http://en.wikipedia.org/wiki/Session_Description_Protocol) format. They specify
 the capabilities and media of each `RTCPeerConnection`.
@@ -257,6 +259,7 @@ Use RTCPeerConnection and RTCDataChannel to enable exchange of text messages.
 
 Most of the code in this section is the same as for the RTCPeerConnection example. Additional code is as follows:
 
+  ```js
   function sendData(){
     var data = document.getElementById("dataChannelSend").value;
     sendChannel.send(data);
@@ -283,6 +286,7 @@ Most of the code in this section is the same as for the RTCPeerConnection exampl
   function gotMessage(event) {
     document.getElementById("dataChannelReceive").value = event.data;
   }
+  ```
 
 The syntax of RTCDataChannel is deliberately similar to WebSocket, with a `send()` method and a `message` event.
 
@@ -298,8 +302,6 @@ The syntax of RTCDataChannel is deliberately similar to WebSocket, with a `send(
 
 
 ## Step 5: Set up a signaling server and exchange messages
-
-Complete example: [examples/step5](https://github.com/LXJS/training-webrtc/tree/master/examples/step5).
 
 RTCPeerConnection instances need to exchange metadata in order to set up and maintain a WebRTC 'call':
 
@@ -322,42 +324,50 @@ The Node server application in this step has two tasks.
 
 To act as a messaging intermediary:
 
-    socket.on('message', function (message) {
-      log('Got message: ', message);
-      socket.broadcast.emit('message', message);
-    });
+  ```js
+  socket.on('message', function (message) {
+    log('Got message: ', message);
+    socket.broadcast.emit('message', message);
+  });
+  ```
 
 To manage WebRTC video chat 'rooms':
 
-    if (numClients == 0){
-      socket.join(room);
-      socket.emit('created', room);
-    } else if (numClients == 1) {
-      io.sockets.in(room).emit('join', room);
-      socket.join(room);
-      socket.emit('joined', room);
-    } else { // max two clients
-      socket.emit('full', room);
-    }
+  ```js
+  if (numClients == 0){
+    socket.join(room);
+    socket.emit('created', room);
+  } else if (numClients == 1) {
+    io.sockets.in(room).emit('join', room);
+    socket.join(room);
+    socket.emit('joined', room);
+  } else { // max two clients
+    socket.emit('full', room);
+  }
+  ```
 
 Our simple WebRTC application will only permit a maximum of two peers to share a room.
 
 1. Ensure you have Node, socket.io and [node-static](https://www.npmjs.org/package/node-static) installed. Node can be downloaded from [nodejs.org](http://nodejs.org/); installation is straightforward and quick. To install socket.io and node-static, run Node Package Manager from a terminal in your application directory:
 
-
-        npm install socket.io
-        npm install node-static
-
-
-  (You don't need to learn about node-static for this exercise: it just makes the server simpler.)
+  ```bash
+  npm install socket.io
+  npm install node-static
+  ```
 
 2. Using the code from the [step 5](examples/step5) directory, run the server (_server.js_). To start the server, run the following command from a terminal in your application directory:
 
-        node server.js
+  ```bash
+  node server.js
+  ```
 
 3. From your browser, open _localhost:2014_. Open a new tab page or window in any browser and open _localhost:2014_ again, then repeat.
 
 4. To see what's happening, check the Chrome DevTools console (Command-Option-J, or Ctrl-Shift-J).
+
+### Solution
+
+[examples/step5](https://github.com/LXJS/training-webrtc/tree/master/examples/step5)
 
 ### Bonus points
 
@@ -374,8 +384,6 @@ Our simple WebRTC application will only permit a maximum of two peers to share a
 
 ## Step 6: RTCPeerConnection with messaging
 
-Complete example: [examples/step6](https://github.com/LXJS/training-webrtc/tree/master/examples/step6).
-
 In this step, we build a video chat client, using the signaling server we created in Step 5 and the RTCPeerConnection code from Step 3.
 
 **This step users [adapter.js](https://github.com/LXJS/training-webrtc/tree/master/examples/step6/js/lib/adapter.js). This is a [JavaScript shim](http://stackoverflow.com/questions/6599815/what-is-the-difference-between-a-shim-and-a-polyfill), maintained by Google, that abstracts away browser differences and spec changes.**
@@ -389,6 +397,10 @@ In this step, we build a video chat client, using the signaling server we create
 3. From your browser, open [localhost:2014](http://localhost:2014). Open a new tab page or window and open [localhost:2014](http://localhost:2014) again.
 
 4. View logging from the Chrome DevTools console and WebRTC debug information from chrome://webrtc-internals.
+
+### Solution
+
+[examples/step6](https://github.com/LXJS/training-webrtc/tree/master/examples/step6)
 
 ### Bonus points
 
