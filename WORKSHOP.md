@@ -73,6 +73,10 @@ When you're done (or if you get stuck), check your solution against the solution
 1. Use `navigator.getUserMedia` to capture the user's webcam.
 1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
+### API Docs
+
+- [navigator.getUserMedia](http://docs.webplatform.org/wiki/dom/Navigator/getUserMedia)
+
 ### Hints
 
 To make `getUserMedia` work across browsers, you need to add the following code:
@@ -170,23 +174,29 @@ in the real world, but good for understanding how RTCPeerConnection works!
   - hangup button: closes the peer connections
 1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
+### API Docs
+
+- [RTCPeerConnection](http://docs.webplatform.org/wiki/apis/webrtc/RTCPeerConnection)
+- [RTCSessionDescription](http://docs.webplatform.org/wiki/apis/webrtc/RTCSessionDescription)
+- [RTCIceCandidate](http://docs.webplatform.org/wiki/apis/webrtc/RTCIceCandidate)
+
 ### Hints
 
 - To make `RTCPeerConnection` work across browsers, you need to add the following code:
 
-```js
-var RTCPeerConnection = window.mozRTCPeerConnection
-  || window.RTCPeerConnection
-  || window.webkitRTCPeerConnection;
+  ```js
+  var RTCPeerConnection = window.mozRTCPeerConnection
+    || window.RTCPeerConnection
+    || window.webkitRTCPeerConnection;
 
-var RTCSessionDescription = window.mozRTCSessionDescription
-  || window.RTCSessionDescription
-  || window.webkitRTCSessionDescription;
+  var RTCSessionDescription = window.mozRTCSessionDescription
+    || window.RTCSessionDescription
+    || window.webkitRTCSessionDescription;
 
-var RTCIceCandidate = window.mozRTCIceCandidate
-  || window.RTCIceCandidate
-  || window.webkitRTCIceCandidate;
-```
+  var RTCIceCandidate = window.mozRTCIceCandidate
+    || window.RTCIceCandidate
+    || window.webkitRTCIceCandidate;
+  ```
 
 - Here is the flow of method calls and events:
 
@@ -216,61 +226,76 @@ basically IP address and port pairs that the remote peer should attempt to conne
 
 ## Step 4: Stream arbitrary data with RTCDataChannel
 
-Complete example: [examples/step4](https://github.com/LXJS/training-webrtc/tree/master/examples/step4).
-
 For this step, we'll use RTCDataChannel to send text between two textareas on the same page. Not very useful, except to demonstrate how the API works.
 
 1. Create a new document and add the following HTML:
 
-        <textarea id="dataChannelSend" disabled></textarea>
-        <textarea id="dataChannelReceive" disabled></textarea>
+  ```html
+  <textarea id="dataChannelSend" disabled></textarea>
+  <textarea id="dataChannelReceive" disabled></textarea>
 
-        <div id="buttons">
-          <button id="startButton">Start</button>
-          <button id="sendButton">Send</button>
-          <button id="closeButton">Stop</button>
-        </div>
+  <div id="buttons">
+    <button id="startButton">Start</button>
+    <button id="sendButton">Send</button>
+    <button id="closeButton">Stop</button>
+  </div>
+  ```
 
-1. Add the JavaScript from [examples/step4/index.html](https://bitbucket.org/webrtc/workshop/raw/tree/master/examples/step4/index.html).
+1. Set up two RTCPeerConnections, just like you did for step 3.
+1. Call `createDataChannel(channelName)` on the first peer connection. It will return a data channel.
+1. To get the data channel from the remote peer connection, listen for the `datachannel` event.
 1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
-### Explanation
+### API Docs
 
-This code uses RTCPeerConnection and RTCDataChannel to enable exchange of text messages.
+- [RTCPeerConnection](http://docs.webplatform.org/wiki/apis/webrtc/RTCPeerConnection)
+- [RTCDataChannel](http://docs.webplatform.org/wiki/apis/webrtc/RTCDataChannel)
+
+### Hints
+
+Use RTCPeerConnection and RTCDataChannel to enable exchange of text messages.
 
 Most of the code in this section is the same as for the RTCPeerConnection example. Additional code is as follows:
 
-    function sendData(){
-      var data = document.getElementById("dataChannelSend").value;
-      sendChannel.send(data);
-    }
-    ...
-    localPeerConnection = new RTCPeerConnection({iceServers:[]});
-    sendChannel = localPeerConnection.createDataChannel("sendDataChannel",
-      {reliable: false});
-    sendChannel.onopen = handleSendChannelStateChange;
-    sendChannel.onclose = handleSendChannelStateChange;
-    ...
-    remotePeerConnection = new RTCPeerConnection({iceServers:[]});
-    function gotReceiveChannel(event) {
-      receiveChannel = event.channel;
-      receiveChannel.onmessage = gotMessage;
-    }
-    ...
-    remotePeerConnection.ondatachannel = gotReceiveChannel;
-    function gotMessage(event) {
-      document.getElementById("dataChannelReceive").value = event.data;
-    }
+  function sendData(){
+    var data = document.getElementById("dataChannelSend").value;
+    sendChannel.send(data);
+  }
+
+  ...
+
+  localPeerConnection = new RTCPeerConnection({ iceServers: [] });
+  sendChannel = localPeerConnection.createDataChannel('sendDataChannel');
+  sendChannel.onopen = handleSendChannelStateChange;
+  sendChannel.onclose = handleSendChannelStateChange;
+
+  ...
+
+  remotePeerConnection = new RTCPeerConnection({ iceServers: [] });
+  function gotReceiveChannel(event) {
+    receiveChannel = event.channel;
+    receiveChannel.onmessage = gotMessage;
+  }
+
+  ...
+
+  remotePeerConnection.ondatachannel = gotReceiveChannel;
+  function gotMessage(event) {
+    document.getElementById("dataChannelReceive").value = event.data;
+  }
 
 The syntax of RTCDataChannel is deliberately similar to WebSocket, with a `send()` method and a `message` event.
 
-Notice the use of constraints.
+### Solution
+
+[examples/step4](https://github.com/LXJS/training-webrtc/tree/master/examples/step4)
 
 ### Bonus points
 
 1. Try out RTCDataChannel file sharing with [Sharefest](http://www.sharefest.me/). When would RTCDataChannel need to provide reliable delivery of data, and when might performance be more important -- even if that means losing some data?
-2. Use CSS to improve page layout, and add a placeholder attribute to the _dataChannelReceive_ textarea.
-4. Test the page on a mobile device.
+1. Use CSS to improve page layout, and add a placeholder attribute to the _dataChannelReceive_ textarea.
+1. Test the page on a mobile device.
+
 
 ## Step 5: Set up a signaling server and exchange messages
 
@@ -346,6 +371,7 @@ Our simple WebRTC application will only permit a maximum of two peers to share a
 
 5. This app uses a JavaScript prompt to get a room name. Work out a way to get the room name from the URL, for example _localhost:2014/foo_ would give the room name _foo_.
 
+
 ## Step 6: RTCPeerConnection with messaging
 
 Complete example: [examples/step6](https://github.com/LXJS/training-webrtc/tree/master/examples/step6).
@@ -376,30 +402,38 @@ In this step, we build a video chat client, using the signaling server we create
 
 5. How would users share the room name? Try to build an alternative to sharing room names.
 
+
 ## Step 7: Putting it all together: RTCPeerConnection + RTCDataChannel + signaling
 
 This is a DIY step!
 
 1. Take a look at the app you built in step 4.
+1. Add the RTCDataChannel code to your Step 6 app to create a complete application.
 
-2. Add the RTCDataChannel code to your Step 6 app to create a complete application.
+### Solution
 
+[examples/step7](https://github.com/LXJS/training-webrtc/tree/master/examples/step7)
 
 ### Bonus points
 
-1. The app hasn't had any work done on layout. Sort it out! Make sure your app works well on different devices.
-
-
+1. Consider separating the WebRTC complexity into it's own separate file or "module". This
+way, the rest of the video chat application doesn't need to understand the WebRTC
+internals. An example of doing this well it [simple-peer](https://github.com/feross/simple-peer)
+1. The app hasn't had any work done on layout. Make it look pretty!
+1. Make sure your app works well on different devices.
+1. Test out Chrome <-> Firefox interop. It should work!
 
 
 ## Step 8: Use a WebRTC library: SimpleWebRTC
-
-Complete example: [examples/step8](https://github.com/LXJS/training-webrtc/tree/master/examples/step8).
 
 Abstraction libraries such as SimpleWebRTC make it simple to create WebRTC applications.
 
 1. Create a new document using the code from [examples/step8/index.html](https://github.com/LXJS/training-webrtc/tree/master/examples/step8/index.html).
 2. Open the document in multiple windows or tab.
+
+### Solution
+
+[examples/step8](https://github.com/LXJS/training-webrtc/tree/master/examples/step8)
 
 ### Bonus points
 
@@ -409,6 +443,4 @@ Abstraction libraries such as SimpleWebRTC make it simple to create WebRTC appli
 
 ## Credit
 
-Most of this workshop is adapted from the excellent [webrtc/workshop](https://bitbucket.org/webrtc/workshop/) repo, by the webrtc project.
-
-It was expanded and updated for this LXJS workshop. Changed to use the new data channel.
+This workshop was adapted from the excellent [webrtc/workshop](https://bitbucket.org/webrtc/workshop/) repo, by the webrtc project. It was updated and expanded for this LXJS workshop!
