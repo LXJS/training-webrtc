@@ -29,7 +29,7 @@ Installed on your development machine:
 1. The [source code](https://github.com/LXJS/training-webrtc).
 1. Node.js with socket.io and node-static. (Node.js hosting would also be an advantage -- see below for some options.)
 
-*The instructions in this codelab assume you are using Mac OS, Linux or Windows. Unless you know what you're doing, it's probably easier not to attempt this codelab from a Chromebook!*
+*The instructions in this workshop assume you are using Mac OS, Linux or Windows. Unless you know what you're doing, it's probably easier not to attempt this workshop from a Chromebook!*
 
 It would also be useful to have an Android device with Google Chrome installed in order to try out the examples on mobile. To run WebRTC APIs on Chrome for Android, you must enable WebRTC from the chrome://flags page.
 
@@ -41,18 +41,23 @@ To run any of the examples provided in the `examples` directory of this repo sim
 node server.js
 ```
 
-That directory's demo will then be live [here](http://localhost:2013).
+That directory's demo will then be live [here](http://localhost:2014).
 
 ## Step 0: Get the code
 
-Using git, clone the codelab repository onto your development computer. If you haven't used git before, there are several tutorials and reference guides available from the [git website](http://git-scm.com/).
+Using git, clone the workshop repository onto your development computer. If you haven't used git before, there are several tutorials and reference guides available from the [git website](http://git-scm.com/).
+
+```bash
+git clone https://github.com/LXJS/training-webrtc.git
+cd training-webrtc
+```
 
 ## Step 1: Create a blank HTML5 document
 
 Complete example: [examples/step1](https://github.com/LXJS/training-webrtc/master/examples/step1).
 
 1. Create a bare-bones HTML document.
-1. Test it out [locally](http://localhost:2013) (see instructions above on running demos).
+1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
     - Why is there nothing on the screen?
 
 
@@ -81,7 +86,7 @@ Complete example: [examples/step2](https://github.com/LXJS/training-webrtc/maste
 
         navigator.getUserMedia(constraints, successCallback, errorCallback);
 
-1. Test it out [locally](http://localhost:2013) (see instructions above on running demos).
+1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
 ### Explanation
 
@@ -142,8 +147,8 @@ This example sets up a connection between two peers on the same page. Not much u
           <button id="hangupButton">Hang Up</button>
         </div>
 
-3. Add the JavaScript from [examples/step3/index.html](https://bitbucket.org/webrtc/codelab/raw/master/examples/step3/index.html).
-1. Test it out [locally](http://localhost:2013) (see instructions above on running demos).
+3. Add the JavaScript from [examples/step3/index.html](https://bitbucket.org/webrtc/workshop/raw/master/examples/step3/index.html).
+1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
 ### Explanation
 
@@ -183,8 +188,8 @@ For this step, we'll use RTCDataChannel to send text between two textareas on th
           <button id="closeButton">Stop</button>
         </div>
 
-1. Add the JavaScript from [examples/step4/index.html](https://bitbucket.org/webrtc/codelab/raw/master/examples/step4/index.html).
-1. Test it out [locally](http://localhost:2013) (see instructions above on running demos).
+1. Add the JavaScript from [examples/step4/index.html](https://bitbucket.org/webrtc/workshop/raw/master/examples/step4/index.html).
+1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
 ### Explanation
 
@@ -284,7 +289,7 @@ Our simple WebRTC application will only permit a maximum of two peers to share a
 
         node server.js
 
-3. From your browser, open _localhost:2013_. Open a new tab page or window in any browser and open _localhost:2013_ again, then repeat.
+3. From your browser, open _localhost:2014_. Open a new tab page or window in any browser and open _localhost:2014_ again, then repeat.
 
 4. To see what's happening, check the Chrome DevTools console (Command-Option-J, or Ctrl-Shift-J).
 
@@ -298,7 +303,7 @@ Our simple WebRTC application will only permit a maximum of two peers to share a
 
 4. Try out Remy Sharp's tool [nodemon](https://github.com/remy/nodemon). This monitors any changes in your Node.js application and automatically restarts the server when changes are saved.
 
-5. This app uses a JavaScript prompt to get a room name. Work out a way to get the room name from the URL, for example _localhost:2013/foo_ would give the room name _foo_.
+5. This app uses a JavaScript prompt to get a room name. Work out a way to get the room name from the URL, for example _localhost:2014/foo_ would give the room name _foo_.
 
 ## Step 6: RTCPeerConnection with messaging
 
@@ -314,7 +319,7 @@ In this step, we build a video chat client, using the signaling server we create
 
         node server.js
 
-3. From your browser, open [localhost:2013](http://localhost:2013). Open a new tab page or window and open [localhost:2013](http://localhost:2013) again.
+3. From your browser, open [localhost:2014](http://localhost:2014). Open a new tab page or window and open [localhost:2014](http://localhost:2014) again.
 
 4. View logging from the Chrome DevTools console and WebRTC debug information from chrome://webrtc-internals.
 
@@ -363,6 +368,6 @@ Abstraction libraries such as SimpleWebRTC make it simple to create WebRTC appli
 
 ## Credit
 
-Most of this workshop is adapted from the excellent [webrtc/codelab](https://bitbucket.org/webrtc/codelab/) repo, by the webrtc project.
+Most of this workshop is adapted from the excellent [webrtc/workshop](https://bitbucket.org/webrtc/workshop/) repo, by the webrtc project.
 
 It was expanded and updated for this LXJS workshop. Changed to use the new data channel.
