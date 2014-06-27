@@ -82,6 +82,11 @@ These are not required, but if you want to hack on WebRTC code before you get to
 
 I'll be your trainer! :) I am currently building [WebTorrent](http://webtorrent.io), a streaming BitTorrent client for the browser, powered by WebRTC. Before that, I built [PeerCDN](https://peercdn.com/), a peer-to-peer content delivery network to makes sites faster and cheaper (which was acquired by Yahoo). Check out my blog at [feross.org](http://feross.org).
 
+## Hi, I'm Philipp!
+
+![fippo](http://andyet.com/images/team/square/fippo.jpg)
+I'm one of the people building [Talky](https://talky.io/), one of the first full-mesh multi-user conferences built with WebRTC, and maintaining the (SimpleWebRTC)[http://simplewebrtc.com] stack.
+
 ## 27 jun - 14:30h Participants
 
 - Joaquim Serafim - [joaquimserafim](https://github.com/joaquimserafim)
