@@ -4,6 +4,8 @@
 
 **WebRTC** (Web Real-Time Communication) is an API drafted by the World Wide Web Consortium (W3C) that supports browser-to-browser applications for voice calling, video chat, and P2P file sharing without plugins.
 
+## [Start the workshop!](WORKSHOP.md)
+
 ## Overview
 
 ### Topics
