@@ -365,8 +365,7 @@ Our simple WebRTC application will only permit a maximum of two peers to share a
   npm install node-static
   ```
 
-1. Write a simple signalling server that allows two clients to exchange signalling messages
-with each other. Take a look at the code in the [examples/step5](examples/step5) directory if you get stuck.
+1. Write a simple signalling server that allows two clients to exchange signalling messages. For this step, you don't need to use any WebRTC APIs on the client-side.
 1. To start your server when you're finished, run the following command from a terminal in your application directory:
 
   ```bash
@@ -375,6 +374,7 @@ with each other. Take a look at the code in the [examples/step5](examples/step5)
 
 1. From your browser, open _localhost:2014_. Open a new tab page or window in any browser and open _localhost:2014_ again, then repeat.
 1. To see what's happening, check the Chrome DevTools console (Command-Option-J, or Ctrl-Shift-J).
+1. Take a look at the code in the [examples/step5](examples/step5) directory if you get stuck.
 
 ### Solution
 
@@ -397,19 +397,22 @@ with each other. Take a look at the code in the [examples/step5](examples/step5)
 
 In this step, we build a video chat client, using the signaling server we created in Step 5 and the RTCPeerConnection code from Step 3.
 
-**This step users [adapter.js](https://github.com/LXJS/training-webrtc/tree/master/examples/step6/js/lib/adapter.js). This is a [JavaScript shim](http://stackoverflow.com/questions/6599815/what-is-the-difference-between-a-shim-and-a-polyfill), maintained by Google, that abstracts away browser differences and spec changes.**
+1. Ensure you have Node, socket.io and [node-static](https://github.com/cloudhead/node-
+static) installed and working. If in doubt, try the code in Step 5.
+1. Using the code from your _step 3_ and _step 5_ solutions as a starting point, write a
+complete app that allows two clients to do a video/audio chat.
+1. Run your server with:
 
-1. Ensure you have Node, socket.io and [node-static](https://github.com/cloudhead/node-static) installed and working. If in doubt, try the code in Step 5.
+  ```bash
+  node server.js
+  ```
 
-2. Using the code from the _step 6_ directory, run the server (_server.js_). To start the server, run the following from your application directory:
-
-        node server.js
-
-3. From your browser, open [localhost:2014](http://localhost:2014). Open a new tab page or window and open [localhost:2014](http://localhost:2014) again.
-
-4. View logging from the Chrome DevTools console and WebRTC debug information from chrome://webrtc-internals.
+1. From your browser, open [localhost:2014](http://localhost:2014). Open a new tab page or window and open [localhost:2014](http://localhost:2014) again.
+1. View logging from the Chrome DevTools console and WebRTC debug information from chrome://webrtc-internals.
 
 ### Solution
+
+**This solution users [adapter.js](https://github.com/LXJS/training-webrtc/tree/master/examples/step6/js/lib/adapter.js). This is a [JavaScript shim](http://stackoverflow.com/questions/6599815/what-is-the-difference-between-a-shim-and-a-polyfill), maintained by Google, that abstracts away browser differences and spec changes.**
 
 [examples/step6](https://github.com/LXJS/training-webrtc/tree/master/examples/step6)
 
@@ -417,7 +420,7 @@ In this step, we build a video chat client, using the signaling server we create
 
 1. This application only supports one-to-one video chat. How might you change the design to enable more than one person to share the same video chat room? (Look at [talky.io](http://talky.io) for an example of this in action.)
 
-2. The example has the room name _foo_ hard coded. What would be the best way to enable other room names?
+2. The solution has the room name _foo_ hard coded. What would be the best way to enable other room names?
 
 3. Does the app work on mobile? Try it out on a phone, on a 7" and a 10" tablet. What layout, UI and UX changes would be required to ensure a good mobile experience?
 
@@ -441,7 +444,7 @@ This is a DIY step!
 
 1. Consider separating the WebRTC complexity into it's own separate file or "module". This
 way, the rest of the video chat application doesn't need to understand the WebRTC
-internals. An example of doing this well it [simple-peer](https://github.com/feross/simple-peer)
+internals. An example of doing this well is [simple-peer](https://github.com/feross/simple-peer).
 1. The app hasn't had any work done on layout. Make it look pretty!
 1. Make sure your app works well on different devices.
 1. Test out Chrome <-> Firefox interop. It should work!
@@ -466,4 +469,4 @@ Abstraction libraries such as SimpleWebRTC make it simple to create WebRTC appli
 
 ## Credit
 
-This workshop was adapted from the excellent [webrtc/workshop](https://bitbucket.org/webrtc/workshop/) repo, by the webrtc project. It was updated and expanded for this LXJS workshop!
+This workshop was adapted by [@feross](https://twitter.com/feross) and [@HCornflower](https://twitter.com/HCornflower) from the excellent [webrtc/workshop](https://bitbucket.org/webrtc/workshop/) repo, by the webrtc project. It was updated and expanded for this LXJS workshop!
