@@ -60,9 +60,9 @@ cd training-webrtc
 1. Use [node-static](https://npmjs.org/package/node-static) to create a simple static file server that listens on port `2014` and serves index.html (and all files in the same folder).
 1. Test it out by visiting [http://localhost:2014](http://localhost:2014).
 
-When you're done (or if you get stuck), check your solution against the solution in the `examples/step1` folder.
-
 ### Solution
+
+When you're done (or if you get stuck), check your solution against the solution in the `examples/step1` folder.
 
 [examples/step1](https://github.com/LXJS/training-webrtc/tree/master/examples/step1)
 
@@ -73,10 +73,12 @@ When you're done (or if you get stuck), check your solution against the solution
 1. Use `navigator.getUserMedia` to capture the user's webcam.
 1. To make `getUserMedia` work across browsers, you need to add the following code:
 
+  ```js
   navigator.getUserMedia = navigator.getUserMedia
     || navigator.webkitGetUserMedia
     || navigator.mozGetUserMedia
     || navigator.msGetUserMedia;
+  ```
 
 1. Test it out [locally](http://localhost:2014) (see instructions above on running demos).
 
@@ -84,27 +86,35 @@ When you're done (or if you get stuck), check your solution against the solution
 
 `getUserMedia` is called like this:
 
+  ```js
   navigator.getUserMedia(constraints, successCallback, errorCallback);
+  ```
 
 The constraints argument allows us to specify the media to get, in this case video only:
 
+  ```js
   var constraints = { video: true }
+  ```
 
 If successful, the success callback is called with the video stream from the
 webcam. You can then set it as the source of a video tag.
 
+  ```js
   function successCallback (localMediaStream) {
     window.stream = localMediaStream; // stream available to console
     var video = document.querySelector('video');
     video.src = window.URL.createObjectURL(localMediaStream);
     video.play();
   }
+  ```
 
 If there was an error (like the user denied access to their webcam), then the error callback is called with an error object.
 
+  ```js
   function errorCallback(error){
     console.error('navigator.getUserMedia error: ', error);
   }
+  ```
 
 ### Solution
 
@@ -122,11 +132,13 @@ If there was an error (like the user denied access to their webcam), then the er
 
 For example:
 
+  ```css
   video {
     filter: hue-rotate(180deg) saturate(200%);
     -moz-filter: hue-rotate(180deg) saturate(200%);
     -webkit-filter: hue-rotate(180deg) saturate(200%);
   }
+  ```
 
 
 ## Step 3: Stream video with RTCPeerConnection
