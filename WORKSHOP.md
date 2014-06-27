@@ -31,7 +31,7 @@ Installed on your development machine:
 
 *The instructions in this workshop assume you are using Mac OS, Linux or Windows. Unless you know what you're doing, it's probably easier not to attempt this workshop from a Chromebook!*
 
-It would also be useful to have an Android device with Google Chrome installed in order to try out the examples on mobile. To run WebRTC APIs on Chrome for Android, you must enable WebRTC from the chrome://flags page.
+It would also be useful to have an Android device with Google Chrome installed in order to try out the examples on mobile. 
 
 ## Running The Examples
 
