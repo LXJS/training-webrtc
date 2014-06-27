@@ -146,13 +146,33 @@ If there was an error (like the user denied access to their webcam), then the er
 
 ## Step 3: Stream video with RTCPeerConnection
 
-`RTCPeerConnection` is the WebRTC API for video and audio calling.
+`RTCPeerConnection` is the WebRTC API for video and audio calling. `RTCPeerConnection`
+instances need to exchange metadata in order to set up and maintain a WebRTC 'call':
 
-Your task is to set up a p2p connection between two peers on the same page. Not much use
-in the real world, but good for understanding how RTCPeerConnection works!
+- Candidate (network, i.e. IP address and port) information.
+- _Offer_ and _answer_ messages providing information about media such as resolution and
+codecs.
+
+In other words, an exchange of metadata is required before peer-to-peer audio, video or
+data streaming can take place. This process is called _signaling_.
+
+In this activity, the 'sender' and 'receiver' RTCPeerConnection objects are on the same
+page, so signaling is simply a matter of passing objects between methods.
+
+In a real world application, the sender and receiver RTCPeerConnections are not on the
+same page, and we need a way for them to communicate metadata.
+
+Here is a rough diagram of the flow of methods and events:
+
+![flow](step3.png)
+
+Of course, for this code challenge, there is no server. Everything is done locally, within the same page.
+
+Your task is to set up a connection between two `RTCPeerConnection` instances on the same
+page. Not much use in the real world, but good for understanding how RTCPeerConnection
+works!
 
 1. Take a look at the [munge SDP example](https://googlechrome.github.io/webrtc/samples/web/content/munge-sdp/). This will give you a concrete idea of the steps involved in a complete "signaling exchange".
-1. Get rid of the JavaScript you've entered so far -- we're going to do something different!
 1. Edit the HTML so there are two video elements and three buttons: Start, Call and Hang Up:
 
   ```html
@@ -198,15 +218,10 @@ in the real world, but good for understanding how RTCPeerConnection works!
     || window.webkitRTCIceCandidate;
   ```
 
-- Here is the flow of method calls and events:
-
-![flow](step3.png)
-
-Of course, for this code challenge, there is no server. Everything is done locally, within the same page.
-
 - The "offers" and "answers" are in [SDP (Session Description
 Protocol)](http://en.wikipedia.org/wiki/Session_Description_Protocol) format. They specify
 the capabilities and media of each `RTCPeerConnection`.
+
 - The "ice candidates" are messages from the [ICE (Interactive Connectivity Establishment
 Protocol)](http://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment). They are
 basically IP address and port pairs that the remote peer should attempt to connect to.
@@ -303,12 +318,7 @@ The syntax of RTCDataChannel is deliberately similar to WebSocket, with a `send(
 
 ## Step 5: Set up a signaling server and exchange messages
 
-RTCPeerConnection instances need to exchange metadata in order to set up and maintain a WebRTC 'call':
-
-* Candidate (network) information.
-* _Offer_ and _answer_ messages providing information about media such as resolution and codecs.
-
-In other words, an exchange of metadata is required before peer-to-peer audio, video or data streaming can take place. This process is called _signaling_.
+RTCPeerConnection instances need to exchange metadata (candidates, offers, answers) in order to set up and maintain a WebRTC 'call'. This metadata exchange is required before peer-to-peer audio, video or data streaming can take place. As discussed before, this process is called _signaling_.
 
 In the examples already completed, the 'sender' and 'receiver' RTCPeerConnection objects are on the same page, so signaling is simply a matter of passing objects between methods.
 
@@ -318,7 +328,7 @@ For this, we use a signaling server: a server that can exchange messages between
 
 **To reiterate: metadata exchange between WebRTC clients (via a signaling server) is required for RTCPeerConnection to do audio, video and data streaming (peer to peer).**
 
-In this step we'll build a simple Node.js signaling server, using the socket.io Node module and JavaScript library for messaging. Experience of [Node.js](http://nodejs.org/) and [socket.io](http://socket.io/) will be useful, but not crucial -- the messaging components are very simple. In this example, the server (the Node app) is _server.js_ and the client (the web app) is _index.html_.
+In this step we'll build a simple Node.js signaling server, using the `socket.io` Node module and JavaScript library for messaging. Experience of [Node.js](http://nodejs.org/) and [socket.io](http://socket.io/) will be useful, but not crucial -- the messaging components are very simple. In this example, the server (the Node app) is _server.js_ and the client (the web app) is _index.html_.
 
 The Node server application in this step has two tasks.
 
@@ -334,7 +344,7 @@ To act as a messaging intermediary:
 To manage WebRTC video chat 'rooms':
 
   ```js
-  if (numClients == 0){
+  if (numClients == 0) {
     socket.join(room);
     socket.emit('created', room);
   } else if (numClients == 1) {
@@ -348,22 +358,23 @@ To manage WebRTC video chat 'rooms':
 
 Our simple WebRTC application will only permit a maximum of two peers to share a room.
 
-1. Ensure you have Node, socket.io and [node-static](https://www.npmjs.org/package/node-static) installed. Node can be downloaded from [nodejs.org](http://nodejs.org/); installation is straightforward and quick. To install socket.io and node-static, run Node Package Manager from a terminal in your application directory:
+1. Ensure you have Node, socket.io, [node-static](https://www.npmjs.org/package/node-static) installed.
 
   ```bash
   npm install socket.io
   npm install node-static
   ```
 
-2. Using the code from the [step 5](examples/step5) directory, run the server (_server.js_). To start the server, run the following command from a terminal in your application directory:
+1. Write a simple signalling server that allows two clients to exchange signalling messages
+with each other. Take a look at the code in the [examples/step5](examples/step5) directory if you get stuck.
+1. To start your server when you're finished, run the following command from a terminal in your application directory:
 
   ```bash
   node server.js
   ```
 
-3. From your browser, open _localhost:2014_. Open a new tab page or window in any browser and open _localhost:2014_ again, then repeat.
-
-4. To see what's happening, check the Chrome DevTools console (Command-Option-J, or Ctrl-Shift-J).
+1. From your browser, open _localhost:2014_. Open a new tab page or window in any browser and open _localhost:2014_ again, then repeat.
+1. To see what's happening, check the Chrome DevTools console (Command-Option-J, or Ctrl-Shift-J).
 
 ### Solution
 
@@ -379,7 +390,7 @@ Our simple WebRTC application will only permit a maximum of two peers to share a
 
 4. Try out Remy Sharp's tool [nodemon](https://github.com/remy/nodemon). This monitors any changes in your Node.js application and automatically restarts the server when changes are saved.
 
-5. This app uses a JavaScript prompt to get a room name. Work out a way to get the room name from the URL, for example _localhost:2014/foo_ would give the room name _foo_.
+5. The solution uses a JavaScript prompt to get a room name. Work out a way to get the room name from the URL, for example _localhost:2014/foo_ would give the room name _foo_.
 
 
 ## Step 6: RTCPeerConnection with messaging
