@@ -111,8 +111,8 @@ webcam. You can then set it as the source of a video tag.
 If there was an error (like the user denied access to their webcam), then the error callback is called with an error object.
 
   ```js
-  function errorCallback(error){
-    console.error('navigator.getUserMedia error: ', error);
+  function errorCallback (err) {
+    console.error('navigator.getUserMedia error: ', err);
   }
   ```
 
@@ -127,10 +127,7 @@ If there was an error (like the user denied access to their webcam), then the er
 3. What does `stream.getVideoTracks()` return?
 4. Look at the constraints object: what happens when you change it to `{ audio: true, video: true }`?
 5. What size is the video element?  How can you get the video's natural size from JavaScript? Use the Chrome Dev Tools to check. Use CSS to make the video full width. How would you ensure the video is no higher than the viewport?
-6. Try adding CSS filters to the video element (more ideas [here](http://html5-demos.appspot.com/static/css/filters/index.html)).
-7. Try changing constraints: see the sample at [simpl.info/getusermedia/constraints](https://simpl.info/getusermedia/constraints/).
-
-For example:
+6. Try adding CSS filters to the video element (more ideas [here](http://html5-demos.appspot.com/static/css/filters/index.html)). For example:
 
   ```css
   video {
@@ -139,6 +136,8 @@ For example:
     -webkit-filter: hue-rotate(180deg) saturate(200%);
   }
   ```
+
+7. Try changing constraints: see the sample at [simpl.info/getusermedia/constraints](https://simpl.info/getusermedia/constraints/).
 
 
 ## Step 3: Stream video with RTCPeerConnection
