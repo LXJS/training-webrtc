@@ -1,6 +1,6 @@
-# WebRTC Workshop
+# Start the Workshop!
 
-##Overview
+## Overview
 
 WebRTC enables real-time communication in the browser.
 
@@ -25,7 +25,7 @@ Installed on your development machine:
 1. Google Chrome or Firefox.
 1. Code editor.
 1. Webcam.
-1. git, in order to get the source code.
+1. Git, in order to get the source code.
 1. The [source code](https://github.com/LXJS/training-webrtc).
 1. Node.js with socket.io and node-static. (Node.js hosting would also be an advantage -- see below for some options.)
 
@@ -40,6 +40,8 @@ To run any of the examples provided in the `examples` directory of this repo sim
 ```
 node server.js
 ```
+
+Before you run the server, you'll need to run `npm install`.
 
 That directory's demo will then be live [here](http://localhost:2014).
 
