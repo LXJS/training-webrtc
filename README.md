@@ -86,7 +86,7 @@ I'll be your trainer! :) I am currently building [WebTorrent](http://webtorrent.
 
 ![fippo](http://andyet.com/images/team/square/fippo.jpg)
 
-I'm one of the people building [Talky](https://talky.io/), one of the first full-mesh multi-user conferences built with WebRTC, and maintaining the (SimpleWebRTC)[http://simplewebrtc.com] stack.
+I'm one of the people building [Talky](https://talky.io/), one of the first full-mesh multi-user conferences built with WebRTC, and maintaining the [SimpleWebRTC](http://simplewebrtc.com) stack.
 
 ## 27 jun - 14:30h Participants
 
