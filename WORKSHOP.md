@@ -137,7 +137,7 @@ If there was an error (like the user denied access to their webcam), then the er
   }
   ```
 
-7. Try changing constraints: see the sample at [simpl.info/getusermedia/constraints](https://simpl.info/getusermedia/constraints/).
+7. Try changing constraints: see the sample at [googlechrome.github.io/webrtc/samples/web/content/getusermedia-resolution/](http://googlechrome.github.io/webrtc/samples/web/content/getusermedia-resolution/).
 
 
 ## Step 3: Stream video with RTCPeerConnection
