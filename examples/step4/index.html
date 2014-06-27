@@ -1,169 +1,172 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>WebRTC workshop: step 4</title>
+  </head>
 
-<head>
+  <body>
+    <textarea id="dataChannelSend" disabled placeholder="Press Start, enter some text, then press Send."></textarea>
+    <textarea id="dataChannelReceive" disabled></textarea>
 
-<meta name="keywords" content="JavaScript, WebRTC" />
-<meta name="description" content="WebRTC workshop" />
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <div id="buttons">
+      <button id="startButton">Start</button>
+      <button id="sendButton">Send</button>
+      <button id="closeButton">Stop</button>
+    </div>
 
-<title>WebRTC workshop: step 4</title>
+    <script>
+      navigator.getUserMedia = navigator.getUserMedia
+        || navigator.webkitGetUserMedia
+        || navigator.mozGetUserMedia
+        || navigator.msGetUserMedia;
 
-<style>
-</style>
+      var RTCPeerConnection = window.mozRTCPeerConnection
+        || window.RTCPeerConnection
+        || window.webkitRTCPeerConnection;
 
-    <script src='js/lib/adapter.js'></script>
+      var RTCSessionDescription = window.mozRTCSessionDescription
+        || window.RTCSessionDescription
+        || window.webkitRTCSessionDescription;
 
-</head>
+      var RTCIceCandidate = window.mozRTCIceCandidate
+        || window.RTCIceCandidate
+        || window.webkitRTCIceCandidate;
 
-<body>
+      var sendChannel, receiveChannel;
 
-	<textarea id="dataChannelSend" disabled placeholder="Press Start, enter some text, then press Send."></textarea>
-	<textarea id="dataChannelReceive" disabled></textarea>
+      var startButton = document.getElementById('startButton');
+      var sendButton = document.getElementById('sendButton');
+      var closeButton = document.getElementById('closeButton');
 
-  <div id="buttons">
-    <button id="startButton">Start</button>
-    <button id="sendButton">Send</button>
-    <button id="closeButton">Stop</button>
-  </div>
+      startButton.disabled = false;
+      sendButton.disabled = true;
+      closeButton.disabled = true;
 
-<script>
-var sendChannel, receiveChannel;
+      startButton.onclick = createConnection;
+      sendButton.onclick = sendData;
+      closeButton.onclick = closeDataChannels;
 
-var startButton = document.getElementById("startButton");
-var sendButton = document.getElementById("sendButton");
-var closeButton = document.getElementById("closeButton");
-startButton.disabled = false;
-sendButton.disabled = true;
-closeButton.disabled = true;
-startButton.onclick = createConnection;
-sendButton.onclick = sendData;
-closeButton.onclick = closeDataChannels;
+      function createConnection () {
+        window.localPeerConnection = new RTCPeerConnection({ iceServers: [] });
+        console.log('Created local peer connection object localPeerConnection');
 
-function trace(text) {
-  console.log((performance.now() / 1000).toFixed(3) + ": " + text);
-}
+        try {
+          sendChannel = localPeerConnection.createDataChannel('sendDataChannel');
+          console.log('Created send data channel with name "sendDataChannel"');
+        } catch (e) {
+          console.log('createDataChannel() failed with exception: ' + e.message);
+        }
+        localPeerConnection.onicecandidate = gotLocalCandidate;
+        sendChannel.onopen = handleSendChannelStateChange;
+        sendChannel.onclose = handleSendChannelStateChange;
 
-function createConnection() {
-  var servers = null;
-  window.localPeerConnection = new RTCPeerConnection(servers);
-  trace('Created local peer connection object localPeerConnection');
+        window.remotePeerConnection = new RTCPeerConnection({ iceServers: [] });
+        console.log('Created remote peer connection object remotePeerConnection');
 
-  try {
-    sendChannel = localPeerConnection.createDataChannel("sendDataChannel",
-      {reliable: false});
-    trace('Created send data channel');
-  } catch (e) {
-    trace('createDataChannel() failed with exception: ' + e.message);
-  }
-  localPeerConnection.onicecandidate = gotLocalCandidate;
-  sendChannel.onopen = handleSendChannelStateChange;
-  sendChannel.onclose = handleSendChannelStateChange;
+        remotePeerConnection.onicecandidate = gotRemoteIceCandidate;
+        remotePeerConnection.ondatachannel = gotReceiveChannel;
 
-  window.remotePeerConnection = new RTCPeerConnection(servers);
-  trace('Created remote peer connection object remotePeerConnection');
+        localPeerConnection.createOffer(gotLocalDescription, handleError);
+        startButton.disabled = true;
+        closeButton.disabled = false;
+      }
 
-  remotePeerConnection.onicecandidate = gotRemoteIceCandidate;
-  remotePeerConnection.ondatachannel = gotReceiveChannel;
+      function gotLocalCandidate (event) {
+        console.log('local ice callback');
+        if (event.candidate) {
+          remotePeerConnection.addIceCandidate(event.candidate);
+          console.log('Local ICE candidate: \n' + event.candidate.candidate);
+        }
+      }
 
-  localPeerConnection.createOffer(gotLocalDescription,handleError);
-  startButton.disabled = true;
-  closeButton.disabled = false;
-}
+      function handleSendChannelStateChange () {
+        var readyState = sendChannel.readyState;
+        console.log('Send channel state is: ' + readyState);
+        if (readyState == 'open') {
+          dataChannelSend.disabled = false;
+          dataChannelSend.focus();
+          dataChannelSend.placeholder = '';
+          sendButton.disabled = false;
+          closeButton.disabled = false;
+        } else {
+          dataChannelSend.disabled = true;
+          sendButton.disabled = true;
+          closeButton.disabled = true;
+        }
+      }
 
-function sendData() {
-  var data = document.getElementById("dataChannelSend").value;
-  sendChannel.send(data);
-  trace('Sent data: ' + data);
-}
+      function gotRemoteIceCandidate (event) {
+        console.log('remote ice callback');
+        if (event.candidate) {
+          localPeerConnection.addIceCandidate(event.candidate);
+          console.log('Remote ICE candidate: \n ' + event.candidate.candidate);
+        }
+      }
 
-function closeDataChannels() {
-  trace('Closing data channels');
-  sendChannel.close();
-  trace('Closed data channel with label: ' + sendChannel.label);
-  receiveChannel.close();
-  trace('Closed data channel with label: ' + receiveChannel.label);
-  localPeerConnection.close();
-  remotePeerConnection.close();
-  localPeerConnection = null;
-  remotePeerConnection = null;
-  trace('Closed peer connections');
-  startButton.disabled = false;
-  sendButton.disabled = true;
-  closeButton.disabled = true;
-  dataChannelSend.value = "";
-  dataChannelReceive.value = "";
-  dataChannelSend.disabled = true;
-  dataChannelSend.placeholder = "Press Start, enter some text, then press Send.";
-}
+      function gotReceiveChannel (event) {
+        console.log('Receive Channel Callback');
+        receiveChannel = event.channel;
+        receiveChannel.onmessage = handleMessage;
+        receiveChannel.onopen = handleReceiveChannelStateChange;
+        receiveChannel.onclose = handleReceiveChannelStateChange;
+      }
 
-function gotLocalDescription(desc) {
-  localPeerConnection.setLocalDescription(desc);
-  trace('Offer from localPeerConnection \n' + desc.sdp);
-  remotePeerConnection.setRemoteDescription(desc);
-  remotePeerConnection.createAnswer(gotRemoteDescription,handleError);
-}
+      function handleMessage (event) {
+        console.log('Received message: ' + event.data);
+        document.getElementById('dataChannelReceive').value = event.data;
+      }
 
-function gotRemoteDescription(desc) {
-  remotePeerConnection.setLocalDescription(desc);
-  trace('Answer from remotePeerConnection \n' + desc.sdp);
-  localPeerConnection.setRemoteDescription(desc);
-}
+      function handleReceiveChannelStateChange () {
+        var readyState = receiveChannel.readyState;
+        console.log('Receive channel state is: ' + readyState);
+      }
 
-function gotLocalCandidate(event) {
-  trace('local ice callback');
-  if (event.candidate) {
-    remotePeerConnection.addIceCandidate(event.candidate);
-    trace('Local ICE candidate: \n' + event.candidate.candidate);
-  }
-}
+      function gotLocalDescription (desc) {
+        localPeerConnection.setLocalDescription(desc);
+        console.log('Offer from localPeerConnection \n' + desc.sdp);
+        remotePeerConnection.setRemoteDescription(desc);
+        remotePeerConnection.createAnswer(gotRemoteDescription,handleError);
+      }
 
-function gotRemoteIceCandidate(event) {
-  trace('remote ice callback');
-  if (event.candidate) {
-    localPeerConnection.addIceCandidate(event.candidate);
-    trace('Remote ICE candidate: \n ' + event.candidate.candidate);
-  }
-}
+      function gotRemoteDescription (desc) {
+        remotePeerConnection.setLocalDescription(desc);
+        console.log('Answer from remotePeerConnection \n' + desc.sdp);
+        localPeerConnection.setRemoteDescription(desc);
+      }
 
-function gotReceiveChannel(event) {
-  trace('Receive Channel Callback');
-  receiveChannel = event.channel;
-  receiveChannel.onmessage = handleMessage;
-  receiveChannel.onopen = handleReceiveChannelStateChange;
-  receiveChannel.onclose = handleReceiveChannelStateChange;
-}
+      function sendData () {
+        var data = document.getElementById('dataChannelSend').value;
+        sendChannel.send(data);
+        console.log('Sent data: ' + data);
+      }
 
-function handleMessage(event) {
-  trace('Received message: ' + event.data);
-  document.getElementById("dataChannelReceive").value = event.data;
-}
+      function closeDataChannels () {
+        console.log('Closing data channels');
+        sendChannel.close();
+        console.log('Closed data channel with label: ' + sendChannel.label);
+        receiveChannel.close();
+        console.log('Closed data channel with label: ' + receiveChannel.label);
 
-function handleSendChannelStateChange() {
-  var readyState = sendChannel.readyState;
-  trace('Send channel state is: ' + readyState);
-  if (readyState == "open") {
-    dataChannelSend.disabled = false;
-    dataChannelSend.focus();
-    dataChannelSend.placeholder = "";
-    sendButton.disabled = false;
-    closeButton.disabled = false;
-  } else {
-    dataChannelSend.disabled = true;
-    sendButton.disabled = true;
-    closeButton.disabled = true;
-  }
-}
+        localPeerConnection.close();
+        remotePeerConnection.close();
+        localPeerConnection = null;
+        remotePeerConnection = null;
+        console.log('Closed peer connections');
 
-function handleReceiveChannelStateChange() {
-  var readyState = receiveChannel.readyState;
-  trace('Receive channel state is: ' + readyState);
-}
+        startButton.disabled = false;
+        sendButton.disabled = true;
+        closeButton.disabled = true;
 
-function handleError(){}
+        dataChannelSend.value = '';
+        dataChannelReceive.value = '';
+        dataChannelSend.disabled = true;
+        dataChannelSend.placeholder = 'Press Start, enter some text, then press Send.';
+      }
 
-</script>
+      function handleError (err) {
+        console.error(err);
+      }
 
-</body>
-
+    </script>
+  </body>
 </html>
