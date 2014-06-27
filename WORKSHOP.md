@@ -204,13 +204,13 @@ Most of the code in this section is the same as for the RTCPeerConnection exampl
       sendChannel.send(data);
     }
     ...
-    localPeerConnection = new RTCPeerConnection(servers);
+    localPeerConnection = new RTCPeerConnection({iceServers:[]});
     sendChannel = localPeerConnection.createDataChannel("sendDataChannel",
       {reliable: false});
     sendChannel.onopen = handleSendChannelStateChange;
     sendChannel.onclose = handleSendChannelStateChange;
     ...
-    remotePeerConnection = new RTCPeerConnection(servers);
+    remotePeerConnection = new RTCPeerConnection({iceServers:[]});
     function gotReceiveChannel(event) {
       receiveChannel = event.channel;
       receiveChannel.onmessage = gotMessage;
