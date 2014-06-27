@@ -144,7 +144,8 @@ If there was an error (like the user denied access to their webcam), then the er
 
 `RTCPeerConnection` is the WebRTC API for video and audio calling.
 
-Your task is to set up a connection between two peers on the same page. Not much use in the real world, but good for understanding how RTCPeerConnection works!
+Your task is to set up a p2p connection between two peers on the same page. Not much use
+in the real world, but good for understanding how RTCPeerConnection works!
 
 1. Take a look at the [munge SDP example](https://googlechrome.github.io/webrtc/samples/web/content/munge-sdp/). This will give you a concrete idea of the steps involved in a complete "signaling exchange".
 1. Get rid of the JavaScript you've entered so far -- we're going to do something different!
@@ -162,7 +163,8 @@ Your task is to set up a connection between two peers on the same page. Not much
   </div>
   ```
 
-1. Use `getUserMedia` and `RTCPeerConnection` to implement video calling between the two video tags. The buttons should do the following:
+1. Use `getUserMedia` and `RTCPeerConnection` to capture a video stream and send it to a
+"remote" RTCPeerConnection. The buttons in the UI should do the following:
   - start button: captures webcam video stream
   - call button: creates two RTCPeerConnection objects, sets up listeners
   - hangup button: closes the peer connections
@@ -170,10 +172,16 @@ Your task is to set up a connection between two peers on the same page. Not much
 
 ### Hints
 
-* Get and share local and remote descriptions: metadata about local media in [SDP (Session Description Protocol)](http://en.wikipedia.org/wiki/Session_Description_Protocol) format.
+- Here is the flow of method calls and events:
 
-* Get and share [ICE (Interactive Connectivity Establishment Protocol)](http://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment) candidates: network information.
-* Pass the local stream to the remote _RTCPeerConnection_.
+![flow](step3.png)
+
+- The "offers" and "answers" are in [SDP (Session Description
+Protocol)](http://en.wikipedia.org/wiki/Session_Description_Protocol) format. They specify
+the capabilities and media of each `RTCPeerConnection`.
+- The "ice candidates" are messages from the [ICE (Interactive Connectivity Establishment
+Protocol)](http://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment). They are
+basically IP address and port pairs that the remote peer should attempt to connect to.
 
 ### Solution
 
@@ -183,9 +191,9 @@ Your task is to set up a connection between two peers on the same page. Not much
 
 1. Take a look at _chrome://webrtc-internals_. (There is a full list of Chrome URLs at _chrome://about_.)
 2. Style the page with CSS:
-    - Put the videos side by side.
-    - Make the buttons the same width, with bigger text.
-    - Make sure it works on mobile.
+  - Put the videos side by side.
+  - Make the buttons the same width, with bigger text.
+  - Make sure it works on mobile.
 3. From the Chrome Dev Tools console, inspect _localStream_, _localPeerConnection_ and _remotePeerConnection_.
 4. Take a look at _localPeerConnection.localDescription_. What does SDP format look like?
 
